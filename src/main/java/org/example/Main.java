@@ -1,6 +1,7 @@
 package org.example;
 
-import java.lang.reflect.Array;
+import email.EmailValidator;
+
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,6 @@ public class Main {
 
         Map<Point, Double> map2 = new HashMap<>();
         */
-
 
         // compareTwoStrings("Ayoub", "Ayoub");
 
@@ -59,6 +59,37 @@ public class Main {
 
         String[] input = {"hello", "ola", "bye", "ciaogg"};
         findLongestString(input);
+
+        // ########################### Methods ###########################
+        sumTwoNumbers(2, 4);
+        System.out.println(compareNumbers(2, 4));
+        System.out.println(capitilizeString("AYOub"));
+        System.out.println(countWordsInSentence("test test test sentence"));
+        // ########################### Enums ###########################
+        System.out.println("my shirt size is " + ShirtSize.M);
+        loopEnum();
+
+        // ########################### Packages ###########################
+        System.out.println("is Email valid: " + EmailValidator.validateEmail("test@test.com"));
+
+        // ########################### Exception Handling ###########################
+        // Exercise 2
+        checkDecisionByZero();
+        // Exercise 1
+        int sum = 0;
+        List<String> cantBeConvertedIndexes = new ArrayList<>();
+        for (int i=0; i<args.length;i++){
+            try{
+                int parsedInt = Integer.parseInt(args[i]);
+                sum += parsedInt;
+            }catch (NumberFormatException e){
+                cantBeConvertedIndexes.add(args[i]);
+                System.out.println(e.getMessage());
+            }
+        }
+        String stringsNonConverted = cantBeConvertedIndexes.toString();
+        System.out.println("the sum = " + sum + " and these can't be converted: " + stringsNonConverted.substring(1, stringsNonConverted.length()-1));
+
     }
 
     // ########## Filter a list of numbers return numbers grater than 3  ##########
@@ -320,6 +351,68 @@ public class Main {
         return res;
     }
 
+
+    // ########################### Methods ###########################
+    // ____________ methods#exercise-1 ____________
+    private static void sumTwoNumbers(int n, int m){
+        System.out.println("the sum of the two numbers = " + n+m);
+    }
+
+    // ____________ methods#exercise-2 ____________
+    private static void negateNumber(int n){
+        System.out.println(-n);
+    }
+
+    // ____________ methods#exercise-3 ____________
+    private static boolean areNumbersEqual(int n, int m){
+        return n==m;
+    }
+
+    // ____________ methods#exercise-4 ____________
+    private static String compareNumbers(int n, int m){
+        return  n==m ? "The numbers are equal"
+                : n>m ? "The first number is larger"
+                : "The second number is larger" ;
+    }
+
+    // ____________ methods#exercise-5 ____________
+    private static String capitilizeString(String str){
+        String res = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        return res;
+    }
+
+    // ____________ methods#exercise-7 ____________
+    private static int countWordsInSentence(String sentence){
+        int count = sentence.split(" ").length;
+        return count;
+    }
+
+    // ########################### Enums ###########################
+    // ____________ enums#exercise-1 ____________
+    enum ShirtSize {
+        S, M, L, XL, XXL
+    }
+    // ____________ enums#exercise-2 ____________
+
+    // ____________ enums#exercise-3 ____________
+    private static void loopEnum(){
+        ShirtSize[] sizes = ShirtSize.values();
+
+        for(ShirtSize s : sizes){
+            String lower = s.name().toLowerCase();
+            System.out.println(lower);
+        }
+    }
+
+    // ########################### Exception Handling ###########################
+    private static void checkDecisionByZero(){
+        try{
+            int result = 10 / 2;
+            System.out.println(result);
+        }catch (ArithmeticException e){
+            System.out.println("can't divide by zero");
+        }
+    }
 
 
 
